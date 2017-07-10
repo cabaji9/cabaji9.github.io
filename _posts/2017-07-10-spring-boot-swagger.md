@@ -9,14 +9,14 @@ categories: java springboot
 
 1) Add dependencies on build.gradle
 
-```json
+{% highlight gradle linenos %}
     compile 'io.springfox:springfox-swagger2:2.6.1'
     runtime 'io.springfox:springfox-swagger-ui:2.6.1' 
-```
+{% endhighlight %}
   
 2) Add configuration file for swagger with a new Docket that contains the path of the api and the path of the url.
 
-```java
+{% highlight java linenos %}
 
 import com.google.common.base.Predicate;
 import org.springframework.context.annotation.Bean;
@@ -70,7 +70,7 @@ public class SwaggerConfig {
 }
 
 
-```
+{% endhighlight %}
 
 
 
