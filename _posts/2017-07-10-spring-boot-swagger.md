@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Swagger Spring boot two steps"
+title:  "Swagger Spring boot three steps"
 date:   2017-07-10 15:39:46 -0500
 categories: java springboot
 ---
@@ -15,6 +15,7 @@ categories: java springboot
 {% endhighlight %}
   
 2) Add configuration file for swagger with a new Docket that contains the path of the api and the path of the url.
+   Notice the profile -> this is cause we dont want swagger on test.
 
 {% highlight java linenos %}
 
@@ -38,6 +39,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
  */
 @Configuration
 @EnableSwagger2
+@Profile("!test")
 public class SwaggerConfig {
     @Bean
     public Docket dataApi() {
@@ -71,6 +73,11 @@ public class SwaggerConfig {
 
 
 {% endhighlight %}
+
+
+3) On application.properties for test add:
+
+spring.profiles.active=test
 
 
 
