@@ -1,26 +1,52 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Swagger Spring boot two steps</title>
+    <title>Swagger Spring boot three steps</title>
     
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link href="/css/syntax.css" rel="stylesheet">
+      <link href="/styles/site.css" rel="stylesheet">
+
+      <script src="/javascript/jquery-3.2.1.min.js"></script>
+      <script src="/javascript/bootstrap.min.js"></script>
+
   
   </head>
 
 
   <body>
-    <nav>
-<ul>
-<li><a href="/">Home</a></li>
-<li><a href="/about">About</a></li>
-<li><a href="/cv">CV</a></li>
-<li><a href="/blog">Blog</a></li>
-</ul>
-    </nav>
-<div class="container">
 
-  <h1>Swagger Spring boot two steps</h1>
+  <div class="container">
+  <nav class="navbar navbar-default">
+      <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Cabaji Blog!</a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/about">About</a></li>
+                  <li><a href="/cv">CV</a></li>
+                  <li><a href="/blog">Blog</a></li>
+
+              </ul>
+
+          </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+  </nav>
+
+
+
+  <h1>Swagger Spring boot three steps</h1>
 <p class="meta">10 Jul 2017</p>
 
 <div class="post">
@@ -33,7 +59,8 @@
     <span class="n">runtime</span> <span class="s1">'io.springfox:springfox-swagger-ui:2.6.1'</span> <span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p>2) Add configuration file for swagger with a new Docket that contains the path of the api and the path of the url.</p>
+<p>2) Add configuration file for swagger with a new Docket that contains the path of the api and the path of the url.
+   Notice the profile -&gt; this is cause we dont want swagger on test.</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
@@ -84,7 +111,8 @@
 47
 48
 49
-50</pre></td><td class="code"><pre><span class="kn">import</span> <span class="nn">com.google.common.base.Predicate</span><span class="o">;</span>
+50
+51</pre></td><td class="code"><pre><span class="kn">import</span> <span class="nn">com.google.common.base.Predicate</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">springfox.documentation.builders.ApiInfoBuilder</span><span class="o">;</span>
@@ -104,6 +132,7 @@
  */</span>
 <span class="nd">@Configuration</span>
 <span class="nd">@EnableSwagger2</span>
+<span class="nd">@Profile</span><span class="o">(</span><span class="s">"!test"</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SwaggerConfig</span> <span class="o">{</span>
     <span class="nd">@Bean</span>
     <span class="kd">public</span> <span class="n">Docket</span> <span class="nf">dataApi</span><span class="o">()</span> <span class="o">{</span>
@@ -136,10 +165,14 @@
 <span class="o">}</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
+<p>3) On application.properties for test add:</p>
+
+<p>spring.profiles.active=test</p>
+
 
 </div>
 
-</div>
+
   
   <footer>
    <ul>
@@ -147,6 +180,8 @@
    <li><a href="https://github.com/hankquinlan">github.com/hankquinlan</a></li>
    </ul>
   </footer>
+
+  </div>
   </body>
 
 </html>
